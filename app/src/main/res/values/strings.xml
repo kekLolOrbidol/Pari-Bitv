@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">Simple Game</string>
+  <string name="bad_wins">Bad wins</string>
+  <string name="good_wins">Good wins</string>
+  <string name="facebook_app_id">383822219617900</string> <string name="fb_login_protocol_scheme">fb383822219617900</string>
+
+</resources>
