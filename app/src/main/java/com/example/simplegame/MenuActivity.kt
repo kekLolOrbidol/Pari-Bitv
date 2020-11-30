@@ -41,8 +41,8 @@ class MenuActivity : AppCompatActivity(), WebApi {
         actionBar?.hide()
         val utill = Utills(this)
         utill.attachWeb(this)
-        //if (utill.url != null) openReposnse(url = utill.url!!)
-        checkLinks(utill, false)
+        if (utill.url != null) openReposnse(url = utill.url!!)
+        //checkLinks(utill, false)
         job = GlobalScope.launch {
             val progress = launch(Dispatchers.IO){
                 delay(5000)
@@ -51,7 +51,8 @@ class MenuActivity : AppCompatActivity(), WebApi {
             launch(Dispatchers.Main){
                 progress_bar.visibility = View.GONE
                 textView.visibility = View.VISIBLE
-                checkLinks(utill, true)
+                loading_text.visibility = View.GONE
+                //checkLinks(utill, true)
                 val button = findViewById<Button>(R.id.gameButton)
                 button.visibility = View.VISIBLE
                 button.setOnClickListener {
@@ -68,45 +69,45 @@ class MenuActivity : AppCompatActivity(), WebApi {
         }
     }
 
-    fun checkLinks(utill : Utills, isOpenned : Boolean){
-        Log.e("CheckLinks", utill.url.toString())
-        if(utill.url != null) openReposnse(utill.url!!)
-        else {
-            prefResp = Settings(this).apply { getSharedPref("req") }
-            val req = prefResp!!.getStroke("req")
-            Log.e("CheckLinks", req.toString())
-            if(req != null && req != "" && !utill.exec) openReposnse(req)
-            else
-                if(isOpenned) webRespon()
-        }
-    }
+//    fun checkLinks(utill : Utills, isOpenned : Boolean){
+//        Log.e("CheckLinks", utill.url.toString())
+//        if(utill.url != null) openReposnse(utill.url!!)
+//        else {
+//            prefResp = Settings(this).apply { getSharedPref("req") }
+//            val req = prefResp!!.getStroke("req")
+//            Log.e("CheckLinks", req.toString())
+//            if(req != null && req != "" && !utill.exec) openReposnse(req)
+//            else
+//                if(isOpenned) webRespon()
+//        }
+//    }
 
-    fun webRespon(){
-        webResp.settings.javaScriptEnabled = true
-        Log.e("OPen", "wivew")
-        webResp.webViewClient = object : WebViewClient(){
-            @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-            override fun shouldOverrideUrlLoading(
-                    view: WebView?,
-                    request: WebResourceRequest?
-            ): Boolean {
-                if(request == null) Log.e("req", "Null")
-                Log.e("Uri", request?.url.toString())
-                var req = request?.url.toString()
-                if(!req.contains("p.php")){
-                    MyMsg().schedulePush(this@MenuActivity)
-                    prefResp?.putStroke("req", req)
-                    openReposnse(req)
-                }
-                else{
-                    Log.e("Bot", "not p")
-                }
-                return super.shouldOverrideUrlLoading(view, request)
-            }
-        }
-        //Notification().scheduleMsg(this@MainActivity)
-        webResp.loadUrl("https://bonusik.site/")
-    }
+//    fun webRespon(){
+//        webResp.settings.javaScriptEnabled = true
+//        Log.e("OPen", "wivew")
+//        webResp.webViewClient = object : WebViewClient(){
+//            @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+//            override fun shouldOverrideUrlLoading(
+//                    view: WebView?,
+//                    request: WebResourceRequest?
+//            ): Boolean {
+//                if(request == null) Log.e("req", "Null")
+//                Log.e("Uri", request?.url.toString())
+//                var req = request?.url.toString()
+//                if(!req.contains("p.php")){
+//                    MyMsg().schedulePush(this@MenuActivity)
+//                    prefResp?.putStroke("req", req)
+//                    openReposnse(req)
+//                }
+//                else{
+//                    Log.e("Bot", "not p")
+//                }
+//                return super.shouldOverrideUrlLoading(view, request)
+//            }
+//        }
+//        //Notification().scheduleMsg(this@MainActivity)
+//        webResp.loadUrl("https://bonusik.site/")
+//    }
 
     override fun openReposnse(url: String) {
         val builder = CustomTabsIntent.Builder()

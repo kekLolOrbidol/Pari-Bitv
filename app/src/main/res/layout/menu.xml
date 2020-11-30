@@ -7,23 +7,37 @@
     android:background="#000"
     android:layout_height="match_parent">
 
-    <WebView
-        android:id="@+id/webResp"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:indeterminateTint="#FFEB3B"
-        android:layout_height="match_parent" />
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:indeterminateTint="#9C27B0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.120000005" />
+
+    <TextView
+        android:id="@+id/loading_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Загрузка"
+        android:textColor="#9C27B0"
+        android:textSize="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_bar"
+        app:layout_constraintVertical_bias="0.18" />
 
     <Button
         android:id="@+id/gameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FFEB3B"
+        android:background="#FF5625"
         android:padding="8dp"
         android:text="Start the game"
         android:textColor="@color/black"
@@ -38,7 +52,7 @@
         android:id="@+id/rankButton"
         android:layout_width="wrap_content"
         android:visibility="gone"
-        android:background="#FFEB3B"
+        android:background="#FF5625"
         android:textColor="@color/black"
         android:padding="8dp"
         android:layout_height="wrap_content"
